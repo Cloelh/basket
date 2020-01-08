@@ -198,3 +198,66 @@
 	add_shortcode('calendrier', 'shortcodecalendrier');
 	add_shortcode('classement', 'shortcodeclassement');
 
+
+
+
+
+
+	function paris(){
+		echo "<h2>Parier sur les matchs de la prochaine journée</h2>";
+		echo '<h2>Match à venir</h2>';
+		global $wpdb;
+
+		// rechercher journée actuel
+		$journeeactuel=1;
+		
+		$nbmatch=0;
+
+		while ($nbmatch==0) {
+			$query = 'SELECT * FROM matchs WHERE journee='.$journeeactuel;
+		 	$resultats = $wpdb->get_results($query) ;
+			foreach ($resultats as $rep) {
+				if ($rep->fait==0) {
+					$nbmatch++;
+				}
+			}
+			if ($nbmatch==0) {
+				$journeeactuel++;
+			}
+		}
+
+
+		$place=1;
+		 
+		 $query = "SELECT * FROM matchs WHERE journee=".$journeeactuel." ORDER BY date_time";
+		 $resultats = $wpdb->get_results($query) ;
+		 
+		 echo "<h4>Journée ".$journeeactuel."</h4>";
+		 echo "<table>";
+		 echo "<tr>
+		 			<th>Date/heure</th>
+		 			<th>Domicile</th>
+		 			<th>Visiteur</th>
+		 			<th>Résultats</th>
+		 		</tr>";
+		 foreach($resultats as $rep){
+		 	if ($rep->fait==0) {
+		 			$dom = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeDom;
+				 	$EquipeDom = $wpdb->get_results($dom)[0]->nom;
+				 	$ext = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeExt;
+				 	$EquipeExt = $wpdb->get_results($ext)[0]->nom;
+
+		 		$resultatmatch="-";
+		 		echo "<tr>";
+			 		echo "<td>".$rep->date_time."</td>";
+			 		echo "<td>".$EquipeDom."</td>";
+			 		echo "<td>".$EquipeExt."</td>";
+			 		echo "<td>".$resultatmatch."</td>";
+			 	echo "</tr>";
+		 	}
+		 	
+		 }
+		 echo "</table>";
+
+	}
+
