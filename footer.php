@@ -1,5 +1,5 @@
 </div>
-</div>
+</section>
 
 	<footer class="blog-footer">
 		<p>@Cloelhenry @Lisondagostini</p>

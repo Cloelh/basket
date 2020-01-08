@@ -16,16 +16,23 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="flaticon-helmet"></i><span>Logo</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-            </button>
-            <div class="collapse navbar-collapse mr-auto" id="ftco-nav">
-                <?php wp_nav_menu(array('theme_location' => 'Top')); ?>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light scrolled awake" id="ftco-navbar">
+            <div class="container">
+                <a class="navbar-brand" href="index.html"><i class="flaticon-helmet"></i><span>Logo</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="oi oi-menu"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse mr-auto" id="ftco-nav">
+                    <?php wp_nav_menu(array('theme_location' => 'Top')); ?>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <div class='container'>
+    <section class="banner">
+
+    </section>
+    
+    <section class="content">
+        <div class='container'>
