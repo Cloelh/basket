@@ -33,7 +33,7 @@
 	}
 
 
-	function classement(){
+	function shortcodeclassement(){
 			$place=1;
 		 global $wpdb;
 		 $query = "SELECT * FROM equipe ORDER BY points DESC";
@@ -165,5 +165,36 @@
 	}
 
 
-	
-  ?>
+
+	// shortcode pour calendrier
+	function shortcodecalendrier() {
+
+		echo '<form method="POST" action="">';
+		echo '<select name="journee">';
+				echo '<option>1</option>';
+				echo '<option>2</option>';
+				echo '<option>3</option>';
+				echo '<option>4</option>';
+				echo '<option>5</option>';
+				echo '<option>6</option>';
+				echo '<option>7</option>';
+				echo '<option>8</option>';
+				echo '<option>9</option>';
+				echo '<option>10</option>';
+				echo '<option>11</option>';
+			echo '</select>';
+				echo '<input type="submit" name="jouneechoisit">';
+			echo '</form>';
+
+			
+				if (isset($_POST['jouneechoisit'])) {
+					$journeechoisit=$_POST['journee'];
+					calendrierchoisit($journeechoisit);
+				}
+				else {
+					calendrier();
+				};
+	}
+	add_shortcode('calendrier', 'shortcodecalendrier');
+	add_shortcode('classement', 'shortcodeclassement');
+
