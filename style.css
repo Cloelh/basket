@@ -178,7 +178,7 @@ a {
     border-color: black !important;
 }
 
-.menu-main_menu a:hover {
+#menu-main_menu a:hover {
     color: #ff8b23 !important;
     text-decoration: none;
 }
@@ -196,6 +196,28 @@ a {
 }
 
 #menu-main_menu li {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.menu a:hover {
+    color: #ff8b23 !important;
+    text-decoration: none;
+}
+
+.menu {
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
     margin-left: 20px;
     margin-right: 20px;
 }
