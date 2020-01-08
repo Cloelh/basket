@@ -42,6 +42,7 @@
 		 echo "<tr>
 		 			<th> </th>
 		 			<th>Equipes</th>
+		 			<th>Points</th>
 		 			<th>J</th>
 		 			<th>V</th>
 		 			<th>D</th>
@@ -56,6 +57,7 @@
 		 	echo "<tr>";
 		 		echo "<td>".$place."</td>";
 		 		echo "<td>".$rep->nom."</td>";
+		 		echo "<td>".$rep->points."</td>";
 		 		echo "<td>".$joué."</td>";
 		 		echo "<td>".$rep->victoire."</td>";
 		 		echo "<td>".$rep->defaite."</td>";
@@ -206,44 +208,29 @@
 
 
 	function paris(){
-		echo "<h2>Parier sur les matchs de la prochaine journée</h2>";
-		echo '<h2>Match à venir</h2>';
+
+		echo "<h2>Parier sur les matchs des prochaines journées</h2>";
 		global $wpdb;
 
-		// rechercher journée actuel
 		$journeeactuel=1;
 		
-		$nbmatch=0;
-
-		while ($nbmatch==0) {
-			$query = 'SELECT * FROM matchs WHERE journee='.$journeeactuel;
-		 	$resultats = $wpdb->get_results($query) ;
-			foreach ($resultats as $rep) {
-				if ($rep->fait==0) {
-					$nbmatch++;
-				}
-			}
-			if ($nbmatch==0) {
-				$journeeactuel++;
-			}
-		}
 
 
 		$place=1;
 		 
-		 $query = "SELECT * FROM matchs WHERE journee=".$journeeactuel." ORDER BY date_time";
+		 $query = "SELECT * FROM matchs WHERE fait=0 ORDER BY date_time";
 		 $resultats = $wpdb->get_results($query) ;
 		 
-		 echo "<h4>Journée ".$journeeactuel."</h4>";
 		 echo "<table>";
 		 echo "<tr>
-		 			<th>Date/heure</th>
-		 			<th>Domicile</th>
-		 			<th>Visiteur</th>
-		 			<th>Résultats</th>
+		 			<th>Match</th>
+		 			<th>1</th>
+		 			<th>N</th>
+		 			<th>2</th>
 		 		</tr>";
 		 foreach($resultats as $rep){
 		 	if ($rep->fait==0) {
+		 		$cote=mt_rand(52, 86)/10;
 		 			$dom = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeDom;
 				 	$EquipeDom = $wpdb->get_results($dom)[0]->nom;
 				 	$ext = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeExt;
@@ -251,10 +238,10 @@
 
 		 		$resultatmatch="-";
 		 		echo "<tr>";
-			 		echo "<td>".$rep->date_time."</td>";
-			 		echo "<td>".$EquipeDom."</td>";
-			 		echo "<td>".$EquipeExt."</td>";
-			 		echo "<td>".$resultatmatch."</td>";
+			 		echo "<td>".$EquipeDom."	-	".$EquipeExt."</td>";
+			 		for ($i=0; $i < 3; $i++) { 
+			 			echo "<td><button>".$cote."</button></td>";
+			 		}
 			 	echo "</tr>";
 		 	}
 		 	
@@ -263,3 +250,57 @@
 
 	}
 
+
+
+	function shortcodeactu(){
+		$args = array(
+			//'post_type'=>'post'
+		   'category_name' => 'actu'
+		);
+		$wpdf_query = new WP_Query( $args );
+		if ( $wpdf_query->have_posts() ) :
+		  while ( $wpdf_query->have_posts() ) : $wpdf_query->the_post();
+		    echo the_content();
+		  endwhile;
+		endif;
+	}
+
+	add_shortcode('actualites', 'shortcodeactu');
+
+
+	function shortcodestat(){
+			$place=1;
+		 global $wpdb;
+		 $query = "SELECT * FROM equipe ORDER BY points DESC";
+		 $resultats = $wpdb->get_results($query) ;
+		 echo "<table>";
+		 echo "<tr>
+		 			<th> </th>
+		 			<th>Equipes</th>
+		 			<th>Points</th>
+		 			<th>J</th>
+		 			<th>V</th>
+		 			<th>D</th>
+		 			<th>M</th>
+		 			<th>E</th>
+		 			<th>Diff</th>
+		 		</tr>";
+		 foreach($resultats as $rep){
+		 	$joué = $rep->victoire + $rep->defaite;
+		 	$diffpt = $rep->ptPour + $rep->ptContre;
+
+		 	echo "<tr>";
+		 		echo "<td>".$place."</td>";
+		 		echo "<td>".$rep->nom."</td>";
+		 		echo "<td>".$rep->points."</td>";
+		 		echo "<td>".$joué."</td>";
+		 		echo "<td>".$rep->victoire."</td>";
+		 		echo "<td>".$rep->defaite."</td>";
+		 		echo "<td>".$rep->ptPour."</td>";
+		 		echo "<td>".$rep->ptContre."</td>";
+		 		echo "<td>".$diffpt."</td>";
+		 	echo "</tr>";
+		 	$place++;
+		 }
+		 echo "</table>";
+	}
