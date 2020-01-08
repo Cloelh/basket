@@ -6,3 +6,196 @@ Description: Site de paris en ligne
 Requires at least: WordPress 5.0
 Version 1.0
 */
+
+/* ------  MAIN ------ */
+a {
+    color: black;
+}
+
+/* ------ NAV ------ */
+.ftco-navbar-light.scrolled.awake {
+    margin-top: 32px;
+    -webkit-transition: .3s all ease-out;
+    -o-transition: .3s all ease-out;
+    transition: .3s all ease-out;
+}
+
+.ftco-navbar-light.scrolled {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin-top: -130px;
+    background: #fff !important;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    padding: 0;
+}
+
+.ftco-navbar-light {
+    background: transparent !important;
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    padding: 0;
+}
+
+.bg-dark {
+    background-color: #343a40 !important;
+}
+
+@media screen and (min-width: 1200px) {
+    .ftco-navbar-light .container {
+        background: rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 0;
+    }
+}
+
+.ftco-navbar-light .container {
+    width: 1170px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+@media screen and (min-width: 992px) {
+
+    .navbar-expand-lg>.container,
+    .navbar-expand-lg>.container-fluid {
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    }
+}
+
+.navbar>.container,
+.navbar>.container-fluid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+@media screen and (min-width: 1200px) {
+    .ftco-navbar-light .container:before {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        bottom: 0;
+        content: '';
+        width: 100%;
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.ftco-navbar-light.scrolled .navbar-brand {
+    color: white;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.ftco-navbar-light .navbar-brand {
+    color: #000000;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+}
+
+.navbar-brand {
+    font-weight: 400;
+    font-size: 24px;
+    padding-right: 3em;
+    position: relative;
+    font-family: "Oswald", Arial, sans-serif;
+    text-transform: uppercase;
+    z-index: 0;
+}
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+.ftco-navbar-light.scrolled .navbar-brand:before {
+    top: 0;
+    bottom: 0;
+}
+
+.navbar-brand:before {
+    content: '';
+    -ms-transform: skewX(-40deg);
+    transform: skewX(-40deg);
+    -webkit-transform: skewX(-40deg);
+    background: #171b21;
+    position: absolute;
+    right: -33px;
+    top: -20px;
+    bottom: -20px;
+    left: -1000%;
+    z-index: -1;
+}
+
+@media screen and (min-width: 992px) {
+    .navbar-expand-lg .navbar-nav {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+}
+
+.navbar-dark .navbar-nav .active>.nav-link,
+.navbar-dark .navbar-nav .nav-link.active,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .show>.nav-link {
+    color: black !important;
+    text-transform: uppercase;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: black !important;
+    text-transform: uppercase;
+}
+
+.navbar-dark .navbar-toggler {
+    color: black !important;
+    border-color: black !important;
+}
+
+.menu a:hover {
+    color: #ff8b23 !important;
+    text-decoration: none;
+}
+
+.menu {
+    margin-left: auto;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-left: 20px;
+    margin-right: 20px;
+}
