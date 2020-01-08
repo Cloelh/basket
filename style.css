@@ -178,24 +178,24 @@ a {
     border-color: black !important;
 }
 
-.menu a:hover {
+.menu-main_menu a:hover {
     color: #ff8b23 !important;
     text-decoration: none;
 }
 
-.menu {
+#menu-main_menu {
     margin-left: auto;
     text-transform: uppercase;
 }
 
-.menu ul {
+#menu-main_menu{
     list-style: none;
     display: flex;
     padding: 0;
     margin: 0;
 }
 
-.menu li {
+#menu-main_menu li {
     margin-left: 20px;
     margin-right: 20px;
 }
