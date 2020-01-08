@@ -13,8 +13,9 @@
 	        'after_title'   => '</h2>',
 	    ) );
 	}
-
+	
 	add_action( 'widgets_init', 'carbon_widgets_init' );
+	
 
 
 
@@ -51,6 +52,7 @@
 		 foreach($resultats as $rep){
 		 	$joué = $rep->victoire + $rep->defaite;
 		 	$diffpt = $rep->ptPour + $rep->ptContre;
+
 		 	echo "<tr>";
 		 		echo "<td>".$place."</td>";
 		 		echo "<td>".$rep->nom."</td>";
@@ -66,19 +68,37 @@
 		 echo "</table>";
 	}
 
-	function calandrier(){
+	
+
+	function calendrier(){
+		echo '<h2>Match à venir</h2>';
+		global $wpdb;
 
 		// rechercher journée actuel
-		for ($i=1; $i < 14; $i++) { 
-		 	
+		$journeeactuel=1;
+		
+		$nbmatch=0;
+
+		while ($nbmatch==0) {
+			$query = 'SELECT * FROM matchs WHERE journee='.$journeeactuel;
+		 	$resultats = $wpdb->get_results($query) ;
+			foreach ($resultats as $rep) {
+				if ($rep->fait==0) {
+					$nbmatch++;
+				}
+			}
+			if ($nbmatch==0) {
+				$journeeactuel++;
+			}
 		}
 
-			$place=1;
-		 global $wpdb;
-		 $query = 'SELECT * FROM matchs ORDER BY date_time';
+
+		$place=1;
+		 
+		 $query = "SELECT * FROM matchs WHERE journee=".$journeeactuel." ORDER BY date_time";
 		 $resultats = $wpdb->get_results($query) ;
 		 
-		 echo "<h4>Journée 10</h4>";
+		 echo "<h4>Journée ".$journeeactuel."</h4>";
 		 echo "<table>";
 		 echo "<tr>
 		 			<th>Date/heure</th>
@@ -101,6 +121,41 @@
 			 		echo "<td>".$resultatmatch."</td>";
 			 	echo "</tr>";
 		 	}
+		 	
+		 }
+		 echo "</table>";
+	}
+
+	// calendrier choisit en fonction d'une journée
+	function calendrierchoisit($arg){	
+		echo '<h2>Match de la journée'.$arg.'</h2>';	
+	 	global $wpdb;
+		 $calchoisit = "SELECT * FROM matchs WHERE journee=".$arg." ORDER BY date_time";
+		 $rescalchoisit = $wpdb->get_results($calchoisit) ;
+		 
+		 echo "<h4>Journée ".$arg."</h4>";
+		 echo "<table>";
+		 echo "<tr>
+		 			<th>Date/heure</th>
+		 			<th>Domicile</th>
+		 			<th>Visiteur</th>
+		 			<th>Résultats</th>
+		 		</tr>";
+		 foreach($rescalchoisit as $rep){
+		 	
+		 			$dom = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeDom;
+				 	$EquipeDom = $wpdb->get_results($dom)[0]->nom;
+				 	$ext = 'SELECT * FROM equipe WHERE id='.$rep->idEquipeExt;
+				 	$EquipeExt = $wpdb->get_results($ext)[0]->nom;
+
+		 		$resultatmatch="-";
+		 		echo "<tr>";
+			 		echo "<td>".$rep->date_time."</td>";
+			 		echo "<td>".$EquipeDom."</td>";
+			 		echo "<td>".$EquipeExt."</td>";
+			 		echo "<td>".$resultatmatch."</td>";
+			 	echo "</tr>";
+		 	
 		 	
 		 }
 		 echo "</table>";
